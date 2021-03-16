@@ -9,3 +9,7 @@ Système d'Information de Contrôle d'Écran à Distance or _Remote Screen Contr
 - Twitter module: display the latest tweets of a Twitter user on the window
 - Weather forecasting module: display weather forecast on the window
 - Imgur module: display images from Imgur
+
+## Notes
+
+In the backend, the modules are referred to as 'widgets' to avoid confusion with NestJS modules.
