@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { WidgetService } from './widget.service';
 import { WidgetDto } from './dto/widget.dto';
+import { isSplitWidget } from './widget.utils';
+import { WidgetType } from './widget-type.enum';
 
 @Controller('widgets')
 export class WidgetController {
@@ -26,16 +28,38 @@ export class WidgetController {
 
   @Post()
   create(@Body() widgetDto: WidgetDto) {
-    return this.widgetService.createLeaf(widgetDto);
+    return this.widgetService.recursivelyCreate(widgetDto);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() widgetDto: WidgetDto) {
-    return this.widgetService.update(id, widgetDto);
+  async update(@Param('id') id: string, @Body() widgetDto: WidgetDto) {
+    const widget = await this.widgetService.findOne(id);
+
+    if (!widget) return null;
+    if (isSplitWidget(widget.type as WidgetType)) {
+      await this.widgetService.recursivelyDelete(widget.left);
+      await this.widgetService.recursivelyDelete(widget.right);
+    }
+    if (isSplitWidget(widgetDto.type)) {
+      const left = await this.widgetService.recursivelyCreate(widgetDto.left);
+      const right = await this.widgetService.recursivelyCreate(widgetDto.right);
+
+      widget.left = left.id;
+      widget.right = right.id;
+    } else {
+      widget.left = undefined;
+      widget.right = undefined;
+    }
+    widget.type = widgetDto.type;
+    widget.data = widgetDto.data || undefined;
+
+    return await widget.save();
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.widgetService.deleteLeaf(id);
+  async delete(@Param('id') id: string) {
+    const widget = await this.findOne(id);
+
+    return this.widgetService.recursivelyDelete(widget.id);
   }
 }

@@ -62,14 +62,6 @@ export class WidgetService {
     }
   }
 
-  async update(id: string, widgetDto: WidgetDto) {
-    const widget = await this.widgetModel.findById(id).exec();
-    widget.type = widgetDto.type;
-    if (widgetDto.data) widget.data = widgetDto.data;
-
-    return await widget.save();
-  }
-
   async deleteLeaf(name: string) {
     const widget = await this.widgetModel.findOneAndDelete({ name }).exec();
 
