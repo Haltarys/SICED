@@ -10,6 +10,8 @@ import {
   DB_ADMIN_PASSWORD,
 } from './config/config';
 import { WidgetModule } from './widget/widget.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { WidgetModule } from './widget/widget.module';
     }),
     ProfileModule,
     WidgetModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

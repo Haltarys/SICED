@@ -6,11 +6,13 @@ import {
   Put,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { WidgetService } from './widget.service';
 import { WidgetDto } from './dto/widget.dto';
 import { isSplitWidget } from './widget.utils';
 import { WidgetType } from './widget-type.enum';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('widgets')
 export class WidgetController {
@@ -26,11 +28,13 @@ export class WidgetController {
     return this.widgetService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() widgetDto: WidgetDto) {
     return this.widgetService.recursivelyCreate(widgetDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() widgetDto: WidgetDto) {
     const widget = await this.widgetService.findOne(id);
@@ -56,6 +60,7 @@ export class WidgetController {
     return await widget.save();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const widget = await this.findOne(id);

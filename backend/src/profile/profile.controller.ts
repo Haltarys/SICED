@@ -8,11 +8,13 @@ import {
   Delete,
   BadRequestException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ProfileDto } from './dto/profile.dto';
 import { WidgetService } from 'src/widget/widget.service';
 import { ObjectId } from 'mongoose';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('profiles')
 export class ProfileController {
@@ -41,6 +43,7 @@ export class ProfileController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() profileDto: ProfileDto) {
     try {
@@ -63,6 +66,7 @@ export class ProfileController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':name')
   async update(@Param('name') name: string, @Body() profileDto: ProfileDto) {
     try {
@@ -92,6 +96,7 @@ export class ProfileController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':name')
   async delete(@Param('name') name: string) {
     const profile = await this.profileService.findOne(name);
