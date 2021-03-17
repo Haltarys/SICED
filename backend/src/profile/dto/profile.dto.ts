@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
@@ -8,10 +9,12 @@ import {
 import { WidgetDto } from 'src/widget/dto/widget.dto';
 
 export class ProfileDto {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty()
   @IsObject()
   @ValidateNested()
   @Type(() => WidgetDto)
