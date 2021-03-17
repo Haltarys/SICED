@@ -15,6 +15,7 @@ import { ProfileDto } from './dto/profile.dto';
 import { WidgetService } from 'src/widget/widget.service';
 import { ObjectId } from 'mongoose';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Profile } from './profile.schema';
 
 @Controller('profiles')
 export class ProfileController {
@@ -25,12 +26,14 @@ export class ProfileController {
 
   @Get()
   async findAll() {
-    const profiles = await this.profileService.findAll();
+    const profiles: Profile[] = await this.profileService.findAll();
 
-    return profiles.map(async (profile) => ({
-      name: profile.name,
-      widget: await this.widgetService.recursivelyFind(profile.widget),
-    }));
+    return await Promise.all(
+      profiles.map(async (profile: Profile) => ({
+        name: profile.name,
+        widget: await this.widgetService.recursivelyFind(profile.widget),
+      })),
+    );
   }
 
   @Get(':name')
