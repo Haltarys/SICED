@@ -10,3 +10,13 @@ services:
       - 3000:3000
     volumes:
       - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    env_file:
+      - ./frontend/.env
+    restart: on-failure
+    ports:
+      - 3001:3000
+    volumes:
+      - ./frontend:/app
