@@ -1,13 +1,154 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #13139c;
+  background-color: rgb(158, 158, 158);
+  font-family: Ubuntu, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+.app {
+  height: 100%;
+}
+
+.navbar {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 3em;
+  color: rgb(158, 158, 158);
+  background-color: #15156e;
+}
+
+.navbar h1 {
+  margin: 0.25em;
+}
+
+.navbar h2 {
+  font-size: 0.5em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0f0fd4;
+}
+
+.profiles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.link {
+  margin-top: 1em;
+  padding: 0.25em 0.5em;
+  min-width: 25%;
+  background-color: rgb(148, 148, 148);
+  box-shadow: 3px 3px 3px grey;
+  border-radius: 10px;
+}
+
+.error-page {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(211, 0, 0);
+  font-size: 2em;
+}
+
+.error-page a:hover {
+  color: rgb(255, 0, 0);
+}
+
+.profile {
+  text-align: center;
+  font-size: 2.5em;
+
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+
+.profile-name {
+  padding: 0.25em 0px;
+  background-color: rgb(133, 133, 133);
+  border-bottom: 2px solid rgb(98, 98, 98);
+}
+
+.widget-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  max-height: 90%;
+  border: 5px solid pink;
+}
+
+.widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-width: 20px;
+  border-style: solid;
+}
+
+.widget-split-horizontal {
+  flex-direction: row;
+}
+
+.widget-split-vertical {
+  flex-direction: column;
+}
+
+.leaf {
+  width: 100%;
+  height: 100%;
+}
+
+.image-embed {
+  width: 100%;
+  height: 100%;
+}
+
+.youtube-embed {
+  width: 100%;
+  height: 100%;
+}
+
+.depth-0 {
+  border-color: red;
+}
+
+.depth-1 {
+  border-color: green;
+  height: 50%;
+}
+
+.depth-2 {
+  border-color: blue;
+  height: 66%;
 }
