@@ -9,6 +9,7 @@ import {
   BadRequestException,
   HttpStatus,
   UseGuards,
+  NotFoundException,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ProfileDto } from './dto/profile.dto';
@@ -40,10 +41,14 @@ export class ProfileController {
   async findOne(@Param('name') name: string) {
     const profile = await this.profileService.findOne(name);
 
-    return {
-      name: profile.name,
-      widget: await this.widgetService.recursivelyFind(profile.widget),
-    };
+    if (profile) {
+      return {
+        name: profile.name,
+        widget: await this.widgetService.recursivelyFind(profile.widget),
+      };
+    } else {
+      throw new NotFoundException();
+    }
   }
 
   @UseGuards(JwtAuthGuard)
