@@ -14,6 +14,12 @@ export class Widget {
   @Prop({ type: Types.ObjectId })
   right?: ObjectId;
 
+  @Prop({ type: Types.ObjectId })
+  top?: ObjectId;
+
+  @Prop({ type: Types.ObjectId })
+  bottom?: ObjectId;
+
   @Prop()
   data?: string;
 }

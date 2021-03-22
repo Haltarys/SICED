@@ -19,18 +19,36 @@ export class WidgetDto {
   type: WidgetType;
 
   @ApiProperty({ type: WidgetDto })
-  @ValidateIf((profile: WidgetDto) => isSplitWidget(profile.type))
+  @ValidateIf((profile: WidgetDto) => profile.type === WidgetType.SplitVertical)
   @IsObject()
   @ValidateNested()
   @Type(() => WidgetDto)
   left?: WidgetDto;
 
   @ApiProperty({ type: WidgetDto })
-  @ValidateIf((profile: WidgetDto) => isSplitWidget(profile.type))
+  @ValidateIf((profile: WidgetDto) => profile.type === WidgetType.SplitVertical)
   @IsObject()
   @ValidateNested()
   @Type(() => WidgetDto)
   right?: WidgetDto;
+
+  @ApiProperty({ type: WidgetDto })
+  @ValidateIf(
+    (profile: WidgetDto) => profile.type === WidgetType.SplitHorizontal,
+  )
+  @IsObject()
+  @ValidateNested()
+  @Type(() => WidgetDto)
+  top?: WidgetDto;
+
+  @ApiProperty({ type: WidgetDto })
+  @ValidateIf(
+    (profile: WidgetDto) => profile.type === WidgetType.SplitHorizontal,
+  )
+  @IsObject()
+  @ValidateNested()
+  @Type(() => WidgetDto)
+  bottom?: WidgetDto;
 
   @ApiProperty()
   @ValidateIf((profile: WidgetDto) => !isSplitWidget(profile.type))

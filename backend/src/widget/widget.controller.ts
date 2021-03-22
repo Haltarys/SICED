@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { WidgetService } from './widget.service';
 import { WidgetDto } from './dto/widget.dto';
-import { isSplitWidget } from './widget.utils';
 import { WidgetType } from './widget-type.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
@@ -40,20 +39,33 @@ export class WidgetController {
     const widget = await this.widgetService.findOne(id);
 
     if (!widget) return null;
-    if (isSplitWidget(widget.type as WidgetType)) {
+    if ((widget.type as WidgetType) === WidgetType.SplitVertical) {
       await this.widgetService.recursivelyDelete(widget.left);
       await this.widgetService.recursivelyDelete(widget.right);
+    } else if ((widget.type as WidgetType) === WidgetType.SplitHorizontal) {
+      await this.widgetService.recursivelyDelete(widget.top);
+      await this.widgetService.recursivelyDelete(widget.bottom);
     }
-    if (isSplitWidget(widgetDto.type)) {
+
+    if ((widget.type as WidgetType) === WidgetType.SplitVertical) {
       const left = await this.widgetService.recursivelyCreate(widgetDto.left);
       const right = await this.widgetService.recursivelyCreate(widgetDto.right);
 
       widget.left = left.id;
       widget.right = right.id;
+    } else if ((widget.type as WidgetType) === WidgetType.SplitHorizontal) {
+      const top = await this.widgetService.recursivelyCreate(widgetDto.top);
+      const bottom = await this.widgetService.recursivelyCreate(
+        widgetDto.bottom,
+      );
+
+      widget.top = top.id;
+      widget.bottom = bottom.id;
     } else {
       widget.left = undefined;
       widget.right = undefined;
     }
+
     widget.type = widgetDto.type;
     widget.data = widgetDto.data || undefined;
 
