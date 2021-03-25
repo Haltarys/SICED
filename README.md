@@ -6,7 +6,7 @@ Système d'Information de Contrôle d'Écran à Distance or _Remote Screen Contr
 - Horizontal module: split the current window horizontally into 2 sub-windows
 - YouTube module: embed a YouTube video into the window
 - Image module: embed a given image into the window
-- Twitter module: display the latest tweets of a Twitter user on the window
+- Discord module: display the username and avatar picture of a user
 - Weather forecasting module: display weather forecast on the window
 - Imgur module: display images from Imgur
 
