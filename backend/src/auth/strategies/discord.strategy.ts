@@ -33,6 +33,6 @@ export class DiscordStrategy extends PassportStrategy(Strategy, 'discord') {
       })
       .toPromise();
 
-    return data;
+    return { accessToken, ...data };
   }
 }

@@ -12,6 +12,8 @@ import {
 import { WidgetModule } from './widget/widget.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ImgurModule } from './imgur/imgur.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { UsersModule } from './users/users.module';
     WidgetModule,
     AuthModule,
     UsersModule,
+    ImgurModule,
+    WeatherModule,
   ],
   controllers: [AppController],
   providers: [AppService],

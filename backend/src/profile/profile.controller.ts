@@ -90,7 +90,6 @@ export class ProfileController {
 
       return await profile.save();
     } catch (e) {
-      console.log(e);
       if (e.name === 'MongoError' && e.code === 11000) {
         throw new BadRequestException({
           status: HttpStatus.BAD_REQUEST,

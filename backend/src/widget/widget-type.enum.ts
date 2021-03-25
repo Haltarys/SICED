@@ -3,6 +3,7 @@ export enum WidgetType {
   SplitHorizontal = 'split-horizontal',
   YouTube = 'youtube',
   Image = 'image',
-  Twitter = 'twitter',
-  WeatherForecast = 'weather-forecast',
+  Discord = 'discord',
+  Weather = 'weather',
+  Imgur = 'imgur',
 }

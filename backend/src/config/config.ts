@@ -10,3 +10,8 @@ export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 export const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 export const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
 export const DISCORD_CALLBACK_URL = process.env.DISCORD_CALLBACK_URL;
+
+export const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID;
+export const IMGUR_CLIENT_SECRET = process.env.IMGUR_CLIENT_SECRET;
+
+export const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
