@@ -2,25 +2,27 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import Home from './Home';
 import Profile from './Profile';
-import ErrorPage from './ErrorPage';
+import Error from './Error';
+import Auth from './Auth';
 
 const App = () => {
   return (
     <Router>
-      <div className="app">
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/profiles/:name">
-            <Profile />
-          </Route>
-          <Route path="*">
-            <ErrorPage />
-          </Route>
-        </Switch>
-      </div>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/auth/discord">
+          <Auth />
+        </Route>
+        <Route exact path="/profiles/:name">
+          <Profile />
+        </Route>
+        <Route path="*">
+          <Error />
+        </Route>
+      </Switch>
     </Router>
   );
 };

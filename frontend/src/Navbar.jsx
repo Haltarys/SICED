@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 
-const Navbar = () => {
+const SICEDNavbar = () => {
   return (
-    <nav className="navbar">
-      <Link to="/">
+    <Navbar
+      className="d-flex justify-content-around"
+      bg="primary"
+      variant="dark"
+      expand="lg"
+    >
+      <Navbar.Brand as={Link} to="/">
         <h1>SICED</h1>
-      </Link>
-      <h2>Système d'Information et de Contrôle d'Écran à Distance</h2>
-    </nav>
+      </Navbar.Brand>
+      <div>Système d'Information et de Contrôle d'Écran à Distance</div>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default SICEDNavbar;

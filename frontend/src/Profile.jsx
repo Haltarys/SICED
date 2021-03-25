@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
 import { useParams } from 'react-router';
-import ErrorPage from './ErrorPage';
-import useFetch from './useFetch';
+import Error from './Error';
 import Widget from './Widget';
+import useFetch from './useFetch';
+import { Button, Container, Row } from 'react-bootstrap';
+import Loading from './Loading';
 
 const Profile = () => {
   const { name } = useParams();
@@ -10,19 +11,27 @@ const Profile = () => {
     `http://localhost:3000/profiles/${name}`,
   );
 
-  console.log(profile);
-
   return (
-    <div className="profile">
-      {isLoading && <div>Loading profile...</div>}
-      {error && <ErrorPage error={error} />}
+    <Container fluid className="h-100">
+      <Row>
+        {isLoading && <Loading msg="Loading profile..." />}
+        {error && <Error error={error} />}
+      </Row>
       {profile && (
-        <Fragment>
-          <div className="profile-name">{profile.name}</div>
-          <Widget widget={profile.widget} depth={0} />
-        </Fragment>
+        <>
+          <Row>
+            {profile.name && (
+              <Button variant="secondary" size="lg" block disabled>
+                {profile.name}
+              </Button>
+            )}
+          </Row>
+          <div className="base" style={{ backgroundColor: 'grey' }}>
+            <Widget widget={profile.widget} depth={0} />
+          </div>
+        </>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -6,10 +6,9 @@ export const extractYoutubeID = (url) => {
   return match ? match[1] : null;
 };
 
-const YoutubeEmbed = ({ url, autoplay, loop, fill }) => {
+const YoutubeEmbed = ({ url, autoplay, loop }) => {
   const id = extractYoutubeID(url);
 
-  // return <div>{url}</div>;
   return (
     <iframe
       className="youtube-embed"
