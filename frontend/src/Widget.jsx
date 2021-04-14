@@ -33,4 +33,5 @@ const Widget = ({ widget, depth }) => {
     );
   }
 };
+
 export default Widget;
